@@ -1,6 +1,7 @@
 FROM ubuntu:18.04
 
 RUN apt-get update && apt-get install -y sudo
+RUN sudo apt-get install -y gdb
 
 ## Magma directory hierarchy
 # magma_root is relative to the docker-build's working directory

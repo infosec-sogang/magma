@@ -32,7 +32,7 @@ COPY --chown=root:root ${magma_root}/${magma_path} ${MAGMA}/
 RUN ${MAGMA}/preinstall.sh
 
 # FUZZER SETUP ########
-ARG fuzzer_name=islab
+ARG fuzzer_name=vanilla
 ARG fuzzer_path=fuzzers/${fuzzer_name}
 ENV FUZZER   ${MAGMA_R}/${fuzzer_path}
 USER root:root

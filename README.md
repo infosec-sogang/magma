@@ -111,13 +111,13 @@ or
 ```
 
 ## 3. Usage
-**(TODO : Update It)**
+**(TODO : ADD MORE CONTENTS)**
 ### 3.1 Rebuild all targets libraries with vanilla in docker container
 ```
 $ /magma/fuzzers/vanilla/instrument.sh
 ```
 ### 3.2 Setup new fuzzer
-**(Todo : make it sophisticated, comfortable, friendly)**  
+**(TODO : make it sophisticated, comfortable, friendly)**  
 
 Now, In order to add new fuzzer in this framework  
 We should

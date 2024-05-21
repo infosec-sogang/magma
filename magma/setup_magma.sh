@@ -1,3 +1,5 @@
+# This env will be used in other project
+# For example, DAFL
 export MAGMA_R=/magma
 export MAGMA=/magma/magma
 export OUT=/magma_out

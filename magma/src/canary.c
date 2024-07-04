@@ -57,14 +57,13 @@ static bool magma_init(void)
 
 void magma_log(const char *bug, int condition)
 {
+    if(condition != 0){
+        fprintf(stderr, "%s\n", bug); // Log BUG-ID
+    }
 #ifndef MAGMA_DISABLE_CANARIES
     if (!data_ptr && !magma_init()) {
         goto fatal;
     }
-    if(condition != 0){
-        fprintf(stdout, "%s", bug); // Log BUG-ID
-    }
-
 #ifdef MAGMA_HARDEN_CANARIES
     magma_protect(1);
 #endif

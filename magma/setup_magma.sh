@@ -1,5 +1,4 @@
-# This env will be used in other project
-# For example, DAFL
+# Imported from the original Dockerfile in the magma repository
 export MAGMA_R=/magma
 export MAGMA=/magma/magma
 export OUT=/magma_out
@@ -13,7 +12,7 @@ export RANLIB=/usr/bin/ranlib
 
 BUILD_FLAGS="-include ${MAGMA}/src/canary.h -DMAGMA_ENABLE_CANARIES -DMAGMA_FATAL_CANARIES -g -O0"
 
-export CFLAGS="$CFLAGS $BUILD_FLAGS"
-export CXXFLAGS="$CXXFLAGS $BUILD_FLAGS"
+export CFLAGS=$BUILD_FLAGS
+export CXXFLAGS=$BUILD_FLAGS
 export LIBS="-l:magma.o -lrt"
 export LDFLAGS="-L${OUT} -g"

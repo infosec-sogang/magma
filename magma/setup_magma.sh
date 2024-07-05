@@ -16,3 +16,13 @@ export CFLAGS=$BUILD_FLAGS
 export CXXFLAGS=$BUILD_FLAGS
 export LIBS="-l:magma.o -lrt"
 export LDFLAGS="-L${OUT} -g"
+
+# Prepare common object files in the output directory
+rm -rf $OUT/*
+clang++ -std=c++11 -c /benchmark/afl_driver.cpp -fPIC -o $OUT/afl_driver.o
+clang -D"MAGMA_STORAGE=\"$MAGMA_STORAGE\"" -c "$MAGMA/src/canary.c" \
+    -fPIC -I "$MAGMA/src/" -o "$OUT/canary.o" $LDFLAGS
+clang -D"MAGMA_STORAGE=\"$MAGMA_STORAGE\"" -c "$MAGMA/src/storage.c" \
+    -fPIC -I "$MAGMA/src/" -o "$OUT/storage.o" $LDFLAGS
+ld -r "$OUT/canary.o" "$OUT/storage.o" -o "$OUT/magma.o"
+rm "$OUT/canary.o" "$OUT/storage.o"

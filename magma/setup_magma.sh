@@ -14,12 +14,14 @@ BUILD_FLAGS="-include ${MAGMA}/src/canary.h -DMAGMA_ENABLE_CANARIES -DMAGMA_FATA
 
 export CFLAGS=$BUILD_FLAGS
 export CXXFLAGS=$BUILD_FLAGS
-export LIBS="-l:magma.o -lrt"
+export LIBS="-l:magma.o -l:afl_driver.o -lrt"
 export LDFLAGS="-L${OUT} -g"
 
-# Prepare common object files in the output directory
+# Prepare common object files in the output directory. While the original Magma
+# repository uses fuzzer-specific $CC and $CFLAGS to build these binaries, it
+# won't hurt to compile these with a common compiler (clang) and flags.
 rm -rf $OUT/*
-clang++ -std=c++11 -c /benchmark/afl_driver.cpp -fPIC -o $OUT/afl_driver.o
+clang++ -std=c++11 -c "$MAGMA/src/afl_driver.cpp" -fPIC -o $OUT/afl_driver.o
 clang -D"MAGMA_STORAGE=\"$MAGMA_STORAGE\"" -c "$MAGMA/src/canary.c" \
     -fPIC -I "$MAGMA/src/" -o "$OUT/canary.o" $LDFLAGS
 clang -D"MAGMA_STORAGE=\"$MAGMA_STORAGE\"" -c "$MAGMA/src/storage.c" \

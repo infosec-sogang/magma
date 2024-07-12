@@ -17,8 +17,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-extern "C" {
-
 __attribute__((weak))
 extern int LLVMFuzzerTestOneInput(const unsigned char *data, size_t size);
 __attribute__((weak))
@@ -41,6 +39,4 @@ int main(int argc, char **argv) {
     free(buf);
   }
   return 0;
-}
-
 }

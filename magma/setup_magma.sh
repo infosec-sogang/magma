@@ -22,9 +22,9 @@ export LDFLAGS="-L${OUT} -g"
 # won't hurt to compile these with a common compiler (clang) and flags.
 rm -rf $OUT/*
 clang -c "$MAGMA/src/afl_driver.c" -fPIC -o $OUT/afl_driver.o
-clang -D"MAGMA_STORAGE=\"$MAGMA_STORAGE\"" -c "$MAGMA/src/canary.c" \
+clang $CFLAGS -D"MAGMA_STORAGE=\"$MAGMA_STORAGE\"" -c "$MAGMA/src/canary.c" \
     -fPIC -I "$MAGMA/src/" -o "$OUT/canary.o" $LDFLAGS
-clang -D"MAGMA_STORAGE=\"$MAGMA_STORAGE\"" -c "$MAGMA/src/storage.c" \
+clang $CFLAGS -D"MAGMA_STORAGE=\"$MAGMA_STORAGE\"" -c "$MAGMA/src/storage.c" \
     -fPIC -I "$MAGMA/src/" -o "$OUT/storage.o" $LDFLAGS
 ld -r "$OUT/canary.o" "$OUT/storage.o" -o "$OUT/magma.o"
 rm "$OUT/canary.o" "$OUT/storage.o"

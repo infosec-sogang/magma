@@ -12,5 +12,5 @@ while read patch; do
     echo "Applying $patch"
     name=${patch##*/}
     name=${name%.patch}
-    sed "s/%MAGMA_BUG%/$name/g" "$patch" | patch -p1 -d "$TARGET/repo"
+    sed "s/%MAGMA_BUG%/$name/g" "$patch" | patch -p1 -d $BUILD_DIR
 done

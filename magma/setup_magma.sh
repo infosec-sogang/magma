@@ -6,9 +6,7 @@ MAGMA_CFLAGS="-include ${MAGMA}/src/canary.h -DMAGMA_ENABLE_CANARIES -DMAGMA_FAT
 MAGMA_LDFLAGS="-L${OUT} -g"
 MAGMA_LIBS="-l:magma.o -l:afl_driver.o -lrt"
 
-# Prepare common object files in the output directory. While the original Magma
-# repository uses fuzzer-specific $CC and $CFLAGS to build these binaries, it
-# won't hurt to compile these with a common compiler (clang) and flags.
+# Prepare common object files in the output directory.
 # - Arg1 : CFLAGS string argument
 function setup_magma() {
   rm -rf $OUT/*
